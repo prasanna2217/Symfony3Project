@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Aufgabes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Releasedate</th>
+                <th>Length</th>
+                <th>Genres</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aufgabe in aufgabes %}
+            <tr>
+                <td><a href="{{ path('aufgabe_show', { 'id': aufgabe.id }) }}">{{ aufgabe.id }}</a></td>
+                <td>{{ aufgabe.name }}</td>
+                <td>{% if aufgabe.releaseDate %}{{ aufgabe.releaseDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ aufgabe.length }}</td>
+                <td>{{ aufgabe.genres }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('aufgabe_show', { 'id': aufgabe.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('aufgabe_edit', { 'id': aufgabe.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('aufgabe_new') }}">Create a new aufgabe</a>
+        </li>
+    </ul>
+{% endblock %}
